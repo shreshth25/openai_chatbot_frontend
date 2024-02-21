@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import viteLogo from "/vite.svg";
 import "../App.css";
 import io from "socket.io-client";
-const socket = io(import.meta.env.VITE_BACKEND_URL);
+const url = import.meta.env.VITE_BACKEND_URL
+const socket = io(url);
 
 function AIChat() {
   const [configuration, setConfiguration] = useState({});
@@ -64,7 +65,7 @@ function AIChat() {
     setMessages(newMessages);
     setText("");
 
-    const response = await fetch("http://127.0.0.1:5000/createpost", {
+    const response = await fetch(url+"createpost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
